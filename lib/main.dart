@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter_supabase/auth/auth_service.dart';
-import 'screens/login_page.dart'; // Importa la pantalla de login
+import 'package:flutter_supabase/screens/login_page.dart';
+import 'package:flutter_supabase/screens/splash_screen.dart';
+import 'package:flutter_supabase/screens/home_page.dart';
+import 'package:flutter_supabase/auth/auth_service.dart'; // Asegúrate de tener este archivo
 import 'package:flutter_supabase/auth/auth_gate.dart';
+
+import 'package:flutter/material.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'screens/splash_screen.dart'; // Asegúrate de importar la SplashScreen
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +19,7 @@ void main() async {
     url: "https://dzsykavzkexaixrwhixb.supabase.co",
   );
 
-  // Ejecuta la aplicación con AuthGate como pantalla inicial
+  // Ejecuta la aplicación con SplashScreen como pantalla inicial
   runApp(const MyApp());
 }
 
@@ -23,12 +29,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Supabase Auth',
+      debugShowCheckedModeBanner: false,
+      title: 'S2AM - App de control de gastos',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const AuthGate(), // Usa AuthGate como pantalla inicial
+      // Pantalla inicial ahora es la SplashScreen
+      home: const SplashScreen(),
+      // Agregar las rutas aquí si las necesitas
+      routes: {
+        '/login': (context) => const LoginPage(),  // Definir ruta login
+        '/expenses': (context) => const ExpensesScreen(),  // Definir ruta de gastos
+      },
     );
   }
 }
